@@ -79,89 +79,128 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(changeBackground, 3000);
   }
 
-  // 3. Services Carousel
-  const serviceContainers = document.querySelectorAll('.services-category');
-  if (serviceContainers.length > 0) {
+// Updated Services Carousel Functionality
+function initServicesCarousels() {
+    const serviceContainers = document.querySelectorAll('.services-category');
+    
     serviceContainers.forEach(container => {
-      const carousel = container.querySelector('.services-carousel');
-      const cards = Array.from(carousel.querySelectorAll('.service-card'));
-      const totalCards = cards.length;
-      let currentIndex = 0;
-      let carouselInterval;
-      let isPaused = false;
-      let isAnimating = false;
+        const carousel = container.querySelector('.services-carousel');
+        const cards = Array.from(carousel.querySelectorAll('.service-card'));
+        const prevBtn = container.querySelector('.carousel-prev');
+        const nextBtn = container.querySelector('.carousel-next');
+        const totalCards = cards.length;
+        let currentIndex = 0;
+        let carouselInterval;
+        let isPaused = false;
+        let isAnimating = false;
 
-      function updateCards() {
-        if (isAnimating) return;
-        isAnimating = true;
+        // Initialize cards
+        updateCards();
 
-        cards.forEach(card => {
-          card.classList.remove('center', 'left', 'right', 'active');
-          card.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-          card.style.opacity = '0';
-          card.style.transform = 'translate(-50%, -50%) scale(0.6)';
+        // Start auto rotation
+        startCarousel();
+
+        // Navigation buttons
+        prevBtn.addEventListener('click', () => {
+            navigate(-1);
         });
 
-        const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
-        const rightIndex = (currentIndex + 1) % totalCards;
+        nextBtn.addEventListener('click', () => {
+            navigate(1);
+        });
 
-        cards[leftIndex].classList.add('left');
-        cards[leftIndex].style.opacity = '0.5';
-        cards[leftIndex].style.transform = 'translate(-150%, -50%) scale(0.7) rotateY(30deg)';
+        // Card click handling
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (isAnimating) return;
+                
+                const clickedIndex = cards.indexOf(e.currentTarget);
+                if (clickedIndex !== currentIndex) {
+                    currentIndex = clickedIndex;
+                    updateCards();
+                } else {
+                    // Toggle active state if clicking center card
+                    card.classList.toggle('active');
+                }
+                resetCarousel();
+            });
+        });
 
-        cards[currentIndex].classList.add('center');
-        cards[currentIndex].style.opacity = '1';
-        cards[currentIndex].style.transform = 'translate(-50%, -50%) scale(1.1)';
+        // Pause on hover
+        carousel.addEventListener('mouseenter', () => {
+            isPaused = true;
+            clearInterval(carouselInterval);
+        });
 
-        cards[rightIndex].classList.add('right');
-        cards[rightIndex].style.opacity = '0.5';
-        cards[rightIndex].style.transform = 'translate(50%, -50%) scale(0.7) rotateY(-30deg)';
+        carousel.addEventListener('mouseleave', () => {
+            isPaused = false;
+            startCarousel();
+        });
 
-        setTimeout(() => isAnimating = false, 800);
-      }
-
-      function startCarousel() {
-        if (isPaused) return;
-        carouselInterval = setInterval(() => {
-          currentIndex = (currentIndex + 1) % totalCards;
-          updateCards();
-        }, 3000);
-      }
-
-      carousel.addEventListener('click', (e) => {
-        const clickedCard = e.target.closest('.service-card');
-        if (!clickedCard || isAnimating) return;
-
-        clearInterval(carouselInterval);
-        isPaused = true;
-
-        if (clickedCard.classList.contains('center')) {
-          clickedCard.classList.toggle('active');
-        } else {
-          currentIndex = cards.indexOf(clickedCard);
-          updateCards();
+        function navigate(direction) {
+            if (isAnimating) return;
+            currentIndex = (currentIndex + direction + totalCards) % totalCards;
+            updateCards();
+            resetCarousel();
         }
 
-        if (!carousel.querySelector('.service-card.active')) {
-          isPaused = false;
-          startCarousel();
-        }
-      });
+        function updateCards() {
+            if (isAnimating) return;
+            isAnimating = true;
 
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.services-category') && isPaused) {
-          const activeCard = carousel.querySelector('.service-card.active');
-          if (activeCard) activeCard.classList.remove('active');
-          isPaused = false;
-          startCarousel();
-        }
-      });
+            // Reset all cards
+            cards.forEach(card => {
+                card.classList.remove('center', 'left', 'right', 'active');
+                card.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                card.style.opacity = '0';
+                card.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            });
 
-      updateCards();
-      startCarousel();
+            // Calculate positions
+            const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
+            const rightIndex = (currentIndex + 1) % totalCards;
+
+            // Position left card
+            cards[leftIndex].classList.add('left');
+            cards[leftIndex].style.opacity = '0.6';
+            cards[leftIndex].style.transform = 'translate(-150%, -50%) scale(0.7) rotateY(30deg)';
+
+            // Position center card
+            cards[currentIndex].classList.add('center');
+            cards[currentIndex].style.opacity = '1';
+            cards[currentIndex].style.transform = 'translate(-50%, -50%) scale(1.1)';
+
+            // Position right card
+            cards[rightIndex].classList.add('right');
+            cards[rightIndex].style.opacity = '0.6';
+            cards[rightIndex].style.transform = 'translate(50%, -50%) scale(0.7) rotateY(-30deg)';
+
+            // Animation complete
+            setTimeout(() => {
+                isAnimating = false;
+            }, 600);
+        }
+
+        function startCarousel() {
+            if (isPaused) return;
+            carouselInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % totalCards;
+                updateCards();
+            }, 4000);
+        }
+
+        function resetCarousel() {
+            clearInterval(carouselInterval);
+            startCarousel();
+        }
     });
-  }
+}
 
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initServicesCarousels();
+});
+  
   // 4. About Section Animations
   document.querySelectorAll('#about [data-anim]').forEach(el => {
     const observer = new IntersectionObserver(entries => {
