@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Graphic Design Services | Nedits Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #7b0091;
+      --secondary-color: #f9f5ff;
+      --text-dark: #1a1a1a;
+      --text-light: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #f7f2fb;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Service Hero */
+    .service-hero {
+      background: linear-gradient(135deg, #7b0091, #a600b7, #5a0070);
+      color: var(--text-light);
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-hero::after {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent);
+      animation: rotate 30s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .service-hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .service-hero p {
+      font-size: 1.25rem;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+    /* Service Content */
+    .service-content {
+      margin-top: 60px;
+    }
+
+    .service-content img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    .service-content h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+
+    .service-content p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    /* Features */
+    .service-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .feature-card p {
+      color: #333;
+      font-size: 1rem;
+    }
+
+    /* Design Process */
+    ol {
+      padding-left: 20px;
+      margin-top: 30px;
+    }
+
+    ol li {
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+    }
+
+    ol strong {
+      color: var(--primary-color);
+    }
+
+    /* Back Button */
+    .back-button {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 10px 20px;
+      background-color: #fff;
+      border: 2px solid var(--primary-color);
+      border-radius: 30px;
+      color: var(--primary-color);
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: var(--primary-color);
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .service-hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .service-hero p {
+        font-size: 1rem;
+      }
+
+      .service-content h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <!-- Hero Section -->
+    <section class="service-hero">
+      <h1>Graphic Design Services</h1>
+      <p>Professional visual solutions that make your brand stand out</p>
+    </section>
+
+    <!-- Content Section -->
+    <section class="service-content">
+      <img src="../images/services/graphic-design-large.jpg" alt="Graphic Design Examples">
+
+      <h2>Transform Your Visual Identity</h2>
+      <p>Our graphic design services help businesses create compelling visual assets that communicate their brand message effectively. From logos to complete brand kits, we deliver designs that resonate with your target audience.</p>
+
+      <div class="service-features">
+        <div class="feature-card">
+          <h3>Brand Identity</h3>
+          <p>Logo design, color palettes, typography systems, and brand guidelines that define your visual identity.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Marketing Materials</h3>
+          <p>Brochures, flyers, business cards, and other print materials that showcase your professionalism.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Digital Assets</h3>
+          <p>Social media graphics, email templates, and web elements that maintain brand consistency online.</p>
+        </div>
+      </div>
+
+      <h2>Our Design Process</h2>
+      <ol>
+        <li><strong>Discovery:</strong> We learn about your business, audience, and design needs.</li>
+        <li><strong>Concept Development:</strong> Create initial design concepts for your review.</li>
+        <li><strong>Refinement:</strong> Incorporate feedback and polish the designs.</li>
+        <li><strong>Delivery:</strong> Provide final files in all required formats.</li>
+      </ol>
+
+      <a href="../index.html#services" class="back-button">← Back to All Services</a>
+    </section>
+  </div>
+</body>
+</html>
