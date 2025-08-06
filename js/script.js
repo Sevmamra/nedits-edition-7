@@ -1,6 +1,6 @@
 /**
  * Nedits Edition - Main JavaScript File
- * Contains all animations and interactive elements
+ * Contains all animations and interactive elements 
  */
 
 // Initialize AOS animation library
