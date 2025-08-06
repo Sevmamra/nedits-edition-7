@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const response = await fetch('data/services.json');
         const data = await response.json();
         renderServices(data.services);
-        // Yahan function ka naam theek karein
+        // Yahan function ka naam theek karein 
         initServicesCarousels(); // initCarousels() ko isse replace karein
     } catch (error) {
         console.error('Error loading services:', error);
