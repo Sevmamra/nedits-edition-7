@@ -1,6 +1,12 @@
 /* ======================================
     Global Reset & Body 
 ====================================== */
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -27,7 +33,7 @@ body {
 }
 
 /* ======================================
-    PRELOADER STYLES - UPDATED
+    PRELOADER STYLES
 ====================================== */
 .preloader {
   position: fixed;
@@ -134,9 +140,11 @@ body {
 ====================================== */
 .content-wrapper {
     position: relative;
-    z-index: 10; /* Content will be on top of the footer */
-    background-color: var(--light-bg); /* Restored the original background color */
-    padding-bottom: 0; /* Removed padding-bottom */
+    z-index: 10;
+    background-color: var(--light-bg);
+    padding-bottom: 0;
+    width: 100%;
+    overflow-x: hidden; /* This prevents horizontal overflow */
 }
 
 .site-footer {
@@ -870,8 +878,11 @@ header::before {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     margin-bottom: 40px;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
+    width: 100%;
+    padding-bottom: 20px;
 }
+
 
 .testimonials-carousel::-webkit-scrollbar {
     display: none; /* Chrome/Safari */
@@ -1078,7 +1089,7 @@ header::before {
 }
 
 /* ======================================
-    CONTACT SECTION - NEW DESIGN
+    CONTACT SECTION 
 ====================================== */
 .contact-section {
     background: var(--primary-color);
@@ -1798,8 +1809,8 @@ header::before {
 }
 
 .orbit-container {
-    position: relative;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 400px;
     margin: 0 auto;
 }
