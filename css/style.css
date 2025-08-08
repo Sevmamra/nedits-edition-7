@@ -52,147 +52,159 @@ body {
 /* ======================================
     Header Styles
 ====================================== */
+/* Updated Header Styles */
 header {
-    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
-    color: #fff;
-    line-height: 1;
-    padding: 0 10px;
-    text-align: center;
+    background: linear-gradient(135deg, 
+                var(--primary-color) 0%, 
+                #9b21b8 50%, 
+                var(--secondary-color) 100%);
+    padding: 15px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow Effect */
+header::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+    animation: rotateGlow 20s linear infinite;
+}
+
+@keyframes rotateGlow {
+    100% { transform: rotate(360deg); }
 }
 
 .header-container {
-    align-items: center; /* Changed from flex-start to center for better alignment */
     display: flex;
-    gap: 5px;
+    align-items: center;
     justify-content: center;
-    padding: 2px 0;
-    /* Removed position: relative */
+    gap: 15px;
+    position: relative;
+    z-index: 2; /* Glow ke upar rahe */
 }
 
 .logo {
-    height: 70px;
-    /* Removed position, top, right properties */
+    height: 80px;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
 }
 
 .header-title-img {
-    height: 95px;
-    /* Removed position, top, left properties */
+    height: 100px;
+    transition: transform 0.3s ease;
 }
 
-.tagline {
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    margin-top: -10px; /* Adjusted margin */
-}
-
-/* Header Mobile Styles */
-@media (max-width: 767px) {
-    header {
-        padding: 10px;
-    }
-
-    .header-container {
-        gap: 8px;
-        padding: 5px 0;
-    }
-
-    .logo {
-        height: 95px;
-        /* Removed top, right */
-    }
-
-    .header-title-img {
-        height: 125px;
-        /* Removed top, left */
-    }
-
-    .tagline {
-        font-size: 18px;
-        font-weight: 600;
-        letter-spacing: 0.7px;
-        margin-top: -8px; /* Adjusted margin */
-    }
+.header-title-img:hover {
+    transform: scale(1.05); /* Subtle hover effect */
 }
 
 /* ======================================
     Navbar Styles
 ====================================== */
+/* Updated Navbar Styles */
 .navbar {
-    background: var(--dark-bg);
-    position: sticky;
-    top: 0;
-    z-index: 999;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .nav-links {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 15px 0;
-    list-style: none;
+    gap: 25px;
+    padding: 18px 0;
 }
 
 .nav-links a {
-    color: #eee;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: 0.3s;
+    position: relative;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 0;
 }
 
-.nav-links a:hover,  
-.nav-links a.active {
-    color: var(--accent-color); /* Updated hover color */
+/* Animated Underline */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 /* ======================================
     Hero Section
 ====================================== */
+/* Updated Hero Styles */
 .hero {
-    background: url('../images/hero-bg1.jpg') no-repeat center center;
-    background-size: cover;
-    color: #fff;
-    height: 550px;
-    overflow: hidden;
-    padding: 100px 20px;
     position: relative;
-    text-align: center;
-    transition: background-image 1s ease-in-out;
+    height: 550px; /* Same height maintain */
 }
 
-.hero-bg::after {
-    background: rgba(0, 0, 0, 0.4);
+/* Gradient Overlay */
+.hero::before {
     content: '';
-    height: 100%;
-    left: 0;
     position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg, 
+        rgba(123, 0, 145, 0.7) 0%, 
+        rgba(238, 9, 121, 0.5) 100%
+    );
+    z-index: 1;
 }
 
-.hero-title-img {
-    display: block;
-    height: 360px;
-    margin: -150px auto 20px auto;
+.hero-overlay {
+    position: relative;
+    z-index: 2;
 }
 
+/* Button Upgrade */
 .explore-btn {
-    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color)); /* Updated button color */
+    background: linear-gradient(45deg, 
+                var(--primary-color), 
+                var(--secondary-color));
+    border: none;
     border-radius: 50px;
-    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
-    color: white;
-    display: inline-block;
-    font-size: 22px;
+    padding: 12px 30px;
+    font-size: 18px;
     font-weight: 600;
-    margin: 50px auto 0 auto;
-    padding: 10px 24px;
-    text-decoration: none;
-    transition: 0.3s;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(123, 0, 145, 0.3);
 }
 
-.explore-btn:hover {
-    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color)); /* Updated hover color */
+.explore-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255,255,255,0.3) 0%,
+        rgba(255,255,255,0) 60%
+    );
+    transform: rotate(30deg);
+    transition: transform 0.5s ease;
+}
+
+.explore-btn:hover::after {
+    transform: rotate(30deg) translate(20%, 20%);
 }
 
 /* ======================================
