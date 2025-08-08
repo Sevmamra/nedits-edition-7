@@ -164,25 +164,19 @@ body {
 /* ======================================
     Sticky Footer Wrapper
 ====================================== */
+/* Update content wrapper */
 .content-wrapper {
-    position: relative;
-    z-index: 10;
-    background-color: var(--light-bg);
-    padding-bottom: 0;
-    width: 100%;
-    overflow-x: hidden; /* This prevents horizontal overflow */
+  position: relative;
+  z-index: 1;
+  background-color: var(--light-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.site-footer {
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1; /* Footer will be behind the content */
-    background: var(--dark-bg);
-    color: #fff;
-    padding-top: 100px;
-    margin-top: 0;
+/* Add this new class */
+.main-content {
+  flex: 1;
 }
 
 /* ======================================
