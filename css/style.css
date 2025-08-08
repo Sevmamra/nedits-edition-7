@@ -1991,29 +1991,3 @@ header::before {
     margin-top: 5px;
     font-weight: bold;
 }
-
-
-/* Only for overflow culprits */
-header, .hero-section, .services-section, .skills-section, footer {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-[class*="container"] {
-  max-width: 100%;
-}
-
-[class*="row"] {
-  margin-right: 0 !important;
-  margin-left: 0 !important;
-}
-
-[class*="col"] {
-  padding-right: 0 !important;
-  padding-left: 0 !important;
-}
-
-/* If 100vw is used anywhere */
-section, div {
-  width: auto !important;
-}
