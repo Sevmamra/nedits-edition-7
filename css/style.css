@@ -55,7 +55,7 @@ body {
 /* Updated Header Styles */
 header {
     background: linear-gradient(135deg, 
-                var(--primary-color) 0%, 
+                var(--accent-color) 0%, 
                 #9b21b8 50%, 
                 var(--secondary-color) 100%);
     padding: 15px 0;
@@ -102,109 +102,91 @@ header::after {
     transform: scale(1.05); /* Subtle hover effect */
 }
 
+.tagline {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-top: -10px; /* Adjusted margin */
+}
+
 /* ======================================
     Navbar Styles
 ====================================== */
-/* Updated Navbar Styles */
 .navbar {
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px); /* Frosted glass effect */
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: var(--dark-bg);
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
 .nav-links {
-    gap: 25px;
-    padding: 18px 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px 0;
+    list-style: none;
 }
 
 .nav-links a {
-    position: relative;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 5px 0;
+    color: #eee;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-/* Animated Underline */
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent-color);
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
+.nav-links a:hover,  
+.nav-links a.active {
+    color: var(--accent-color); /* Updated hover color */
 }
 
 /* ======================================
     Hero Section
 ====================================== */
-/* Updated Hero Styles */
 .hero {
+    background: url('../images/hero-bg1.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    height: 550px;
+    overflow: hidden;
+    padding: 100px 20px;
     position: relative;
-    height: 550px; /* Same height maintain */
+    text-align: center;
+    transition: background-image 1s ease-in-out;
 }
 
-/* Gradient Overlay */
-.hero::before {
+.hero-bg::after {
+    background: rgba(0, 0, 0, 0.4);
     content: '';
+    height: 100%;
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        45deg, 
-        rgba(123, 0, 145, 0.7) 0%, 
-        rgba(238, 9, 121, 0.5) 100%
-    );
-    z-index: 1;
 }
 
-.hero-overlay {
-    position: relative;
-    z-index: 2;
+.hero-title-img {
+    display: block;
+    height: 360px;
+    margin: -150px auto 20px auto;
 }
 
-/* Button Upgrade */
 .explore-btn {
-    background: linear-gradient(45deg, 
-                var(--primary-color), 
-                var(--secondary-color));
-    border: none;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color)); /* Updated button color */
     border-radius: 50px;
-    padding: 12px 30px;
-    font-size: 18px;
-    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
     color: white;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(123, 0, 145, 0.3);
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 50px auto 0 auto;
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-.explore-btn::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        to bottom right,
-        rgba(255,255,255,0.3) 0%,
-        rgba(255,255,255,0) 60%
-    );
-    transform: rotate(30deg);
-    transition: transform 0.5s ease;
-}
-
-.explore-btn:hover::after {
-    transform: rotate(30deg) translate(20%, 20%);
+.explore-btn:hover {
+    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color)); /* Updated hover color */
 }
 
 /* ======================================
