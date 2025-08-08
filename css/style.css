@@ -1991,3 +1991,31 @@ header::before {
     margin-top: 5px;
     font-weight: bold;
 }
+
+
+/* 1. Global horizontal scroll disable */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* White space hata dega */
+}
+
+/* 2. Responsive element handling */
+* {
+  box-sizing: border-box;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+section, div, header, footer {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 3. Extra safety for headings/buttons causing overflow */
+h1, h2, h3, h4, h5, h6, p, a, button {
+  word-wrap: break-word;
+}
