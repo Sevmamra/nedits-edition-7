@@ -1403,15 +1403,14 @@ header::before {
 ====================================== */
 
 .site-footer {
-    position: sticky;
-    bottom: 0;
-    left: 0;
+    position: relative;
+    bottom: auto;
     width: 100%;
-    z-index: 1;
     background: var(--dark-bg);
     color: #fff;
     padding-top: 100px;
     margin-top: 0;
+    z-index: 10;
 }
 
 .footer-content {
@@ -1822,10 +1821,13 @@ header::before {
 /* ======================================
     Skills Orbit Section
 ====================================== */
+
 .skills-orbit {
-    text-align: center;
+    position: relative;
     padding: 80px 20px;
     background: #fff;
+    overflow: hidden; /* Add this */
+    z-index: 1; /* Add this */
 }
 
 .skills-orbit .section-title {
@@ -1835,10 +1837,11 @@ header::before {
 }
 
 .orbit-container {
-    width: 100%;
-    max-width: 400px;
-    height: 400px;
-    margin: 0 auto;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  margin: 40px auto 0; /* Adjusted margin */
 }
 
 .center-sun {
