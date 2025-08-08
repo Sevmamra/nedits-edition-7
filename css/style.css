@@ -1993,41 +1993,27 @@ header::before {
 }
 
 
-/* 🚫 Blanket overflow-x: hidden nahi, sirf culprit elements pe */
-body {
-  margin: 0;
-  padding: 0;
+/* Only for overflow culprits */
+header, .hero-section, .services-section, .skills-section, footer {
+  max-width: 100%;
   overflow-x: hidden;
 }
 
-/* Images ka max-width fix */
-img, video {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Jo elements width ke karan nikal rahe hain */
-.services-section .card,
-.skills-section,
-footer {
+[class*="container"] {
   max-width: 100%;
 }
 
-/* Agar kisi element me 100vw hai, to usko replace karke 100% karo */
-.full-width-element {
-  width: 100% !important;
+[class*="row"] {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
 
-/* Footer lock fix */
-footer {
-  position: fixed; /* Always bottom */
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
+[class*="col"] {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 
-/* Safety text wrap */
-h1, h2, h3, h4, h5, h6, p, a, button {
-  word-wrap: break-word;
+/* If 100vw is used anywhere */
+section, div {
+  width: auto !important;
 }
