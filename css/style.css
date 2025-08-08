@@ -53,7 +53,7 @@ body {
     Header Styles
 ====================================== */
 /* ======================================
-    Premium Animated Header
+    Premium Animated Header (Upgraded)
 ====================================== */
 header {
     position: relative;
@@ -61,45 +61,57 @@ header {
     padding: 15px 0;
     color: #fff;
     text-align: center;
-    background: linear-gradient(120deg, #ff7eb3, #ff758c, #8a2be2, #3a86ff);
-    background-size: 300% 300%;
-    animation: gradientShift 15s ease infinite;
+    background: linear-gradient(120deg, #7f5af0, #2cb67d, #3da9fc, #ef4565);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
 }
 
-/* Animated light wave behind logo/title */
+/* Subtle diagonal light sweep */
 header::before {
     content: '';
     position: absolute;
-    top: -50%;
+    top: 0;
     left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 70%);
-    animation: rotateLight 25s linear infinite;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, transparent 80%);
+    transform: skewX(-20deg);
+    animation: lightSweep 6s ease-in-out infinite;
     z-index: 1;
 }
 
-/* Container */
+/* Glass highlight behind logo/title */
+header::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: floatGlow 12s ease-in-out infinite;
+    z-index: 1;
+}
+
 .header-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     position: relative;
-    z-index: 2; /* Above animations */
+    z-index: 2;
 }
 
-/* Logo */
 .logo {
     height: 80px;
     filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
     transition: transform 0.3s ease;
 }
 .logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
-/* Title Image */
 .header-title-img {
     height: 105px;
     transition: transform 0.3s ease;
@@ -131,8 +143,15 @@ header::before {
     100% { background-position: 0% 50%; }
 }
 
-@keyframes rotateLight {
-    100% { transform: rotate(360deg); }
+@keyframes lightSweep {
+    0% { left: -50%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+@keyframes floatGlow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.15); }
 }
 
 @keyframes fadeInUp {
