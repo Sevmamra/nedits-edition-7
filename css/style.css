@@ -1993,29 +1993,41 @@ header::before {
 }
 
 
-/* 1. Global horizontal scroll disable */
-html, body {
+/* 🚫 Blanket overflow-x: hidden nahi, sirf culprit elements pe */
+body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* White space hata dega */
+  overflow-x: hidden;
 }
 
-/* 2. Responsive element handling */
-* {
-  box-sizing: border-box;
-}
-
+/* Images ka max-width fix */
 img, video {
   max-width: 100%;
   height: auto;
 }
 
-section, div, header, footer {
+/* Jo elements width ke karan nikal rahe hain */
+.services-section .card,
+.skills-section,
+footer {
   max-width: 100%;
-  overflow-x: hidden;
 }
 
-/* 3. Extra safety for headings/buttons causing overflow */
+/* Agar kisi element me 100vw hai, to usko replace karke 100% karo */
+.full-width-element {
+  width: 100% !important;
+}
+
+/* Footer lock fix */
+footer {
+  position: fixed; /* Always bottom */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+/* Safety text wrap */
 h1, h2, h3, h4, h5, h6, p, a, button {
   word-wrap: break-word;
 }
