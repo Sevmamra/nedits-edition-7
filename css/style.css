@@ -27,6 +27,86 @@ body {
 }
 
 /* ======================================
+    PRELOADER STYLES
+====================================== */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--dark-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.preloader-logo {
+  width: 200px;
+  height: auto;
+  animation: float 3s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.loading-bar {
+  width: 300px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotateY(180deg);
+  }
+}
+
+@keyframes shrinkAndMove {
+  0% {
+    width: 200px;
+    opacity: 1;
+  }
+  100% {
+    width: 80px;
+    opacity: 0;
+    transform: translate(var(--final-x), var(--final-y));
+  }
+}
+
+/* When preloader is hidden */
+.preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ======================================
     Sticky Footer Wrapper
 ====================================== */
 .content-wrapper {
