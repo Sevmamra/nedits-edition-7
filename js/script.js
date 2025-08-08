@@ -3,6 +3,26 @@
  * Contains all animations and interactive elements 
  */
 
+// In your script.js or before closing </body>
+document.addEventListener('DOMContentLoaded', function() {
+  // Debounce scroll events
+  let isScrolling;
+  window.addEventListener('scroll', function() {
+    window.clearTimeout(isScrolling);
+    isScrolling = setTimeout(function() {
+      // Code to run after scrolling stops
+    }, 66);
+  }, false);
+  
+  // Optimize animations
+  AOS.init({
+    duration: 600,
+    easing: 'ease-out-quad',
+    once: true,
+    disable: window.innerWidth < 768
+  });
+});
+
 // Initialize AOS animation library
 AOS.init({
     duration: 800,
