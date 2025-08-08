@@ -11,48 +11,64 @@ AOS.init({
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Preloader Animation
+  // Preloader Animation - UPDATED
   const preloader = document.querySelector('.preloader');
   const preloaderLogo = document.querySelector('.preloader-logo');
   const loadingProgress = document.querySelector('.loading-progress');
+  const loadingText = document.querySelector('.loading-text');
   const headerLogo = document.querySelector('.logo');
   
-  // Simulate loading progress
-  let progress = 0;
-  const progressInterval = setInterval(() => {
-    progress += Math.random() * 10;
-    if (progress >= 100) {
-      progress = 100;
-      clearInterval(progressInterval);
+  if (preloader) {
+    // Simulate loading progress with realistic increments
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+      // Random but slowing down progress
+      const increment = 1 + Math.random() * (5 - (progress/25));
+      progress = Math.min(progress + increment, 100);
       
-      // Animation when loading is complete
-      setTimeout(() => {
+      loadingProgress.style.width = `${progress}%`;
+      loadingText.textContent = `Loading ${Math.floor(progress)}%`;
+      
+      if (progress >= 100) {
+        clearInterval(progressInterval);
+        loadingText.textContent = "Ready!";
+        
         // Get final position of header logo
         const headerLogoRect = headerLogo.getBoundingClientRect();
         const preloaderLogoRect = preloaderLogo.getBoundingClientRect();
         
         // Calculate movement values
-        const finalX = headerLogoRect.left - preloaderLogoRect.left + (headerLogoRect.width - preloaderLogoRect.width)/2;
-        const finalY = headerLogoRect.top - preloaderLogoRect.top + (headerLogoRect.height - preloaderLogoRect.height)/2;
+        const finalX = headerLogoRect.left - preloaderLogoRect.left + (headerLogoRect.width - 200)/2;
+        const finalY = headerLogoRect.top - preloaderLogoRect.top + (headerLogoRect.height - 200)/2;
         
         // Apply the movement animation
         preloaderLogo.style.setProperty('--final-x', `${finalX}px`);
         preloaderLogo.style.setProperty('--final-y', `${finalY}px`);
-        preloaderLogo.style.animation = 'shrinkAndMove 1s ease-in-out forwards';
+        preloaderLogo.style.animation = 'logoTransition 1.5s ease-in-out forwards';
         
-        // Hide preloader after animation
+        // Fade out preloader background
         setTimeout(() => {
           preloader.classList.add('hidden');
           
           // Remove preloader from DOM after transition
           setTimeout(() => {
-            preloader.remove();
+            preloader.classList.add('removed');
+            
+            // Make sure website is visible
+            document.body.style.overflow = 'auto';
+            
+            // Initialize all other website functionality
+            initWebsiteFunctionality();
           }, 1000);
-        }, 1000);
-      }, 500);
-    }
-    loadingProgress.style.width = `${progress}%`;
-  }, 200);
+        }, 500);
+      }
+    }, 100);
+  } else {
+    // If preloader doesn't exist, just initialize website
+    initWebsiteFunctionality();
+  }
+  
+  function initWebsiteFunctionality() {
 
 
 // Add spinner animation styles
