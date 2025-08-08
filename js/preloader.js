@@ -1,5 +1,6 @@
-// preloader.js - Fixed Version
+// preloader.js - Final Working Version
 document.addEventListener('DOMContentLoaded', function() {
+    // Create preloader element
     const preloader = document.createElement('div');
     preloader.className = 'preloader';
     preloader.innerHTML = `
@@ -14,34 +15,87 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     `;
     
+    // Add to page and disable scrolling
     document.body.prepend(preloader);
     document.body.style.overflow = 'hidden';
     
-    const headerLogo = document.querySelector('.logo');
-    if(headerLogo) headerLogo.style.opacity = '0';
+    // Hide existing header logo
+    const headerLogo = document.querySelector('.header-container .logo');
+    if (headerLogo) {
+        headerLogo.style.opacity = '0';
+    }
     
+    // Simulate loading progress
     let progress = 0;
     const progressInterval = setInterval(() => {
-        progress += Math.random() * 5;
-        if(progress >= 100) {
+        progress += 1 + Math.random() * 4;
+        if (progress >= 100) {
             progress = 100;
             clearInterval(progressInterval);
+            completeLoading();
+        }
+        updateProgress(progress);
+    }, 50);
+    
+    function updateProgress(p) {
+        const progressBar = document.querySelector('.loading-progress');
+        const progressText = document.querySelector('.loading-text');
+        if (progressBar) progressBar.style.width = `${p}%`;
+        if (progressText) progressText.textContent = `Loading ${Math.floor(p)}%`;
+    }
+    
+    function completeLoading() {
+        const preloaderLogo = document.querySelector('.preloader-logo');
+        const headerContainer = document.querySelector('.header-container');
+        
+        if (!preloaderLogo || !headerContainer) {
+            removePreloader();
+            return;
+        }
+        
+        // Animate logo to header position
+        preloaderLogo.style.transition = 'all 1s ease-in-out';
+        preloaderLogo.style.width = '80px';
+        preloaderLogo.style.position = 'fixed';
+        preloaderLogo.style.zIndex = '10000';
+        
+        // Calculate final position
+        const headerRect = headerContainer.getBoundingClientRect();
+        const logoRect = preloaderLogo.getBoundingClientRect();
+        const finalX = headerRect.left + (headerRect.width - logoRect.width) / 2;
+        const finalY = headerRect.top + (headerRect.height - logoRect.height) / 2;
+        
+        // Move logo to header position
+        preloaderLogo.style.left = `${finalX}px`;
+        preloaderLogo.style.top = `${finalY}px`;
+        
+        setTimeout(() => {
+            // Replace header logo
+            const existingLogo = document.querySelector('.header-container .logo');
+            if (existingLogo) {
+                existingLogo.remove();
+            }
             
-            const preloaderLogo = document.querySelector('.preloader-logo');
-            preloaderLogo.style.transition = 'all 1s ease-in-out';
-            preloaderLogo.style.width = '80px';
-            preloaderLogo.style.position = 'fixed';
+            // Add preloader logo to header
+            preloaderLogo.style.position = '';
+            preloaderLogo.style.left = '';
+            preloaderLogo.style.top = '';
+            preloaderLogo.style.transition = '';
+            headerContainer.insertBefore(preloaderLogo, headerContainer.firstChild);
             
+            // Remove preloader
+            removePreloader();
+        }, 1000);
+    }
+    
+    function removePreloader() {
+        const preloader = document.querySelector('.preloader');
+        if (preloader) {
+            preloader.style.opacity = '0';
             setTimeout(() => {
-                if(headerLogo) headerLogo.replaceWith(preloaderLogo);
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.remove();
-                    document.body.style.overflow = 'auto';
-                }, 1000);
+                preloader.remove();
+                document.body.style.overflow = 'auto';
             }, 500);
         }
-        document.querySelector('.loading-progress').style.width = `${progress}%`;
-        document.querySelector('.loading-text').textContent = `Loading ${Math.floor(progress)}%`;
-    }, 50);
+    }
 });
