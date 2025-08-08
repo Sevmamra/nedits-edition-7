@@ -1,6 +1,27 @@
 /* ======================================
     Global Reset & Body 
 ====================================== */
+/* Add these to your style.css */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  will-change: transform; /* Improves scroll performance */
+  overscroll-behavior-y: contain; /* Prevents elastic scrolling */
+}
+
+/* Hardware acceleration for animations */
+[data-aos], .orbit, .timeline-item {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize AOS animations */
+[data-aos] {
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
 
 html, body {
     max-width: 100%;
