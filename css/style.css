@@ -26,7 +26,7 @@ body {
     min-height: 100vh;
 }
 
-/* Preloader Styles */
+/* PRELOADER STYLES */
 .preloader {
     position: fixed;
     top: 0;
@@ -38,7 +38,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    transition: opacity 1s ease;
+    transition: opacity 0.5s ease;
 }
 
 .preloader-content {
@@ -52,6 +52,7 @@ body {
     width: 200px;
     height: auto;
     animation: float 3s ease-in-out infinite;
+    transition: all 1s ease-in-out;
 }
 
 .loading-container {
@@ -59,7 +60,6 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    width: 100%;
 }
 
 .loading-bar {
@@ -79,15 +79,15 @@ body {
 }
 
 .loading-text {
-    color: white;
+    color: #fff;
     font-size: 14px;
+    font-weight: 500;
 }
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
 }
-
 /* ======================================
     Sticky Footer Wrapper
 ====================================== */
